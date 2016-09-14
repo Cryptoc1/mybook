@@ -36,7 +36,7 @@
         }
 
         form {
-            width: 80%;
+            width: 90%;
             margin: 0 auto;
         }
 
@@ -54,7 +54,7 @@
         }
 
         form fieldset input {
-            width: 40%;
+            width: 35%;
             border: none;
             outline: none;
             font-size: 10pt;
@@ -82,6 +82,13 @@
         form button:active {
             background-color: #9E9E9E;
         }
+
+        form #filter-wrapper button {
+            display: inline;
+            padding: 0;
+            margin: 0;
+            background: none;
+        }
     </style>
 </head>
 
@@ -93,9 +100,32 @@
         <form>
             <fieldset id="keywords">
                 <h3>Keyword Filtering</h3>
+                <!-- <div id="filter-wrapper">
+                    <input class="filter" type="text" placeholder="filter"><i class="fa fa-caret-right"></i>
+                    <input class="match" type="text" placeholder="match">
+                    <button class="remove-filter-btn" type="button"><i class="fa fa-close"></i></button>
+                </div> -->
             </fieldset>
+            <br>
             <button id="add-filter-btn" type="button"><i class="fa fa-plus"></i></button>
             <br>
+            <fieldset id="images">
+                <h3>Image Filters</h3>
+                <div id="filter-wrapper">
+                    <select>
+                        <option value=""></option>
+                        <option value="blur">blur</option>
+                        <option value="sephia">sephia</option>
+                        <option value="saturate">saturate</option>
+                        <option value="invert">invert</option>
+                        <option value="grayscale">grayscale</option>
+                        <option value="contrast">contrast</option>
+                    </select>
+                    <input type="text" placeholder="level"><span>%</span>
+                </div>
+            </fieldset>
+            <br>
+            <hr>
             <br>
             <button id="save-btn" type="button">Save</button>
         </form>

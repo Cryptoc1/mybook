@@ -1,51 +1,84 @@
 window.onload = function() {
 
-    var keywordsFieldset = document.getElementById('keywords')
+    var keywordsFieldset = document.getElementById('keywords'),
+        imagesFieldset = document.getElementById('images')
 
+    // Get the saved filters from the background worker
     chrome.runtime.sendMessage({
         from: 'mybook-popup',
-        subject: 'get-words'
+        subject: 'get-filters'
     })
 
     document.getElementById('add-filter-btn').onclick = function(e) {
         var d = document.createElement('div')
-        d.innerHTML = '<input class="filter" type="text" placeholder="filter"><i class="fa fa-caret-right"></i><input class="match" type="text" placeholder="match">'
+        d.id = 'filter-wrapper'
+        d.innerHTML = '<input class="filter" type="text" placeholder="filter"><i class="fa fa-caret-right"></i><input class="match" type="text" placeholder="match"><button class="remove-filter-btn" type="button"><i class="fa fa-close"></i></button>'
         keywordsFieldset.appendChild(d)
+        document.querySelectorAll('.remove-filter-btn').forEach(function(el) {
+            el.addEventListener('click', removeFilter)
+        })
     }
 
-    document.getElementById('save-btn').onclick = function(e) {
-        var words = []
+    document.getElementById('save-btn').onclick = saveFilters
+
+    function initForm(filters) {
+        filters.map(function(filter) {
+            if (filter.type == 'word-filter') {
+                var d = document.createElement('div')
+                d.id = 'filter-wrapper'
+                d.innerHTML = '<input class="filter" type="text" value="' + word.filter + '"><i class="fa fa-caret-right"></i><input class="match" type="text" value="' + word.match + '"><button class="remove-filter-btn" type="button"><i class="fa fa-close"></i></button>'
+                keywordsFieldset.appendChild(d)
+            }
+            if (filter.type == 'image-filter') {
+                var selectEl = imagesFieldset.children[1].children[0]
+                selectEl.querySelector('option[value="' + filter.filter + '"]').setAttribute('selected', 'true')
+                selectEl.parentNode.querySelector('input').value = filter.level
+            }
+        })
+        document.querySelectorAll('.remove-filter-btn').forEach(function(el) {
+            el.addEventListener('click', removeFilter)
+        })
+    }
+
+    chrome.runtime.onMessage.addListener(function(msg, sender) {
+        if (msg.from == 'mybook-background' && msg.subject == 'get-filters-response') {
+            initForm(msg.filters)
+        }
+    })
+
+
+    // HELPERS
+    function removeFilter(e) {
+        var filterEl = e.target.parentNode.parentNode
+        filterEl.parentNode.removeChild(filterEl)
+    }
+
+    function saveFilters() {
+        var filters = []
         for (var i = 0; i < keywordsFieldset.children.length; i++) {
             var el = keywordsFieldset.children[i]
             if (el.tagName == 'DIV') {
-                words.push({
+                filters.push({
+                    type: 'word-filter',
                     filter: el.querySelector('.filter').value,
                     match: el.querySelector('.match').value
                 })
             }
         }
 
+        var selectEl = imagesFieldset.children[1].children[0]
+        filters.push({
+            type: 'image-filter',
+            filter: selectEl.children[selectEl.selectedIndex].value,
+            level: imagesFieldset.children[1].children[1].value
+        })
+
         chrome.runtime.sendMessage({
             from: 'mybook-popup',
-            subject: 'set-words',
-            words: words
+            subject: 'set-filters',
+            filters: filters
         })
 
         document.getElementById('saved').style.display = 'inherit'
     }
-
-
-    function initForm(words) {
-        words.map(function(word) {
-            var d = document.createElement('div')
-            d.innerHTML = '<input class="filter" type="text" value="' + word.filter + '"><i class="fa fa-caret-right"></i><input class="match" type="text" value="' + word.match + '">'
-            keywordsFieldset.appendChild(d)
-        })
-    }
-
-    chrome.runtime.onMessage.addListener(function(msg, sender) {
-        if (msg.from == 'mybook-background' && msg.subject == 'get-words-response') {
-            initForm(msg.words)
-        }
-    })
 }
