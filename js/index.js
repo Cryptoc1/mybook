@@ -29,11 +29,6 @@ window.onload = function() {
                 d.innerHTML = '<input class="filter" type="text" value="' + word.filter + '"><i class="fa fa-caret-right"></i><input class="match" type="text" value="' + word.match + '"><button class="remove-filter-btn" type="button"><i class="fa fa-close"></i></button>'
                 keywordsFieldset.appendChild(d)
             }
-            if (filter.type == 'image-filter') {
-                var selectEl = imagesFieldset.children[1].children[0]
-                selectEl.querySelector('option[value="' + filter.filter + '"]').setAttribute('selected', 'true')
-                selectEl.parentNode.querySelector('input').value = filter.level
-            }
         })
         document.querySelectorAll('.remove-filter-btn').forEach(function(el) {
             el.addEventListener('click', removeFilter)
@@ -65,14 +60,7 @@ window.onload = function() {
                 })
             }
         }
-
-        var selectEl = imagesFieldset.children[1].children[0]
-        filters.push({
-            type: 'image-filter',
-            filter: selectEl.children[selectEl.selectedIndex].value,
-            level: imagesFieldset.children[1].children[1].value
-        })
-
+        
         chrome.runtime.sendMessage({
             from: 'mybook-popup',
             subject: 'set-filters',

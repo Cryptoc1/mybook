@@ -23,12 +23,6 @@ window.onload = function() {
 
             var filters = msg.filters
 
-            /*filters.map(function(filter) {
-                if (filter.type == 'image-filter') {
-                    imageFilter = filter
-                }
-            })*/
-
             scrapeContents()
             filterImages()
 
@@ -56,20 +50,6 @@ window.onload = function() {
 
 
             // HELPERS
-
-            function filterImages() {
-                // TODO: find a better way to do this
-                for (var i = 0; i < filters.length; i++) {
-                    if (filters[i].type == 'image-filter') {
-                        imageFilter = filters[i]
-                        document.querySelectorAll('.scaledImageFitWidth').forEach(function(img) {
-                            img.style.filter = imageFilter.filter + '(' + imageFilter.level + ((imageFilter.filter == 'blur') ? 'px' : '%') + ')'
-                            img.style.WebkitFilter = imageFilter.filter + '(' + imageFilter.level + ((imageFilter.filter == 'blur') ? 'px' : '%') + ')'
-                                // console.log(imageFilter.filter + '(' + imageFilter.level + ((imageFilter.filter == 'blur') ? 'px' : '%') + ')')
-                        })
-                    }
-                }
-            }
 
             function scrapeContents() {
                 // wrapper function
