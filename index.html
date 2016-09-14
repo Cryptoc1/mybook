@@ -49,8 +49,9 @@
             margin: 0;
         }
 
-        form fieldset h3 {
-            text-align: left;
+        form fieldset h3,
+        form fieldset sup {
+            text-align: left !important;
         }
 
         form fieldset input {
@@ -100,6 +101,8 @@
         <form>
             <fieldset id="keywords">
                 <h3>Keyword Filtering</h3>
+                <sup>Note: Whitespace matters</sup>
+
                 <!-- <div id="filter-wrapper">
                     <input class="filter" type="text" placeholder="filter"><i class="fa fa-caret-right"></i>
                     <input class="match" type="text" placeholder="match">
@@ -108,7 +111,25 @@
             </fieldset>
             <br>
             <button id="add-filter-btn" type="button"><i class="fa fa-plus"></i></button>
-            <br><br>
+            <br>
+            <fieldset id="images">
+                <h3>Image Filters</h3>
+                <div id="filter-wrapper">
+                    <select>
+                        <option value="">none</option>
+                        <option value="blur">blur</option>
+                        <option value="contrast">contrast</option>
+                        <option value="saturate">saturate</option>
+
+                        <!-- Don't know why, but I can't get these ones to work -->
+                        <!-- <option value="sephia">sephia</option> -->
+                        <!-- <option value="invert">invert</option> -->
+                        <!-- <option value="grayscale">grayscale</option> -->
+                    </select>
+                    <input type="text" placeholder="level"><span>%</span>
+                </div>
+            </fieldset>
+            <br>
             <hr>
             <button id="save-btn" type="button">Save</button>
         </form>

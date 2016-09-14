@@ -1,3 +1,13 @@
+/*
+    background.js
+
+    runs in the background to store the fitlers and help the popup communicate change in the filters to the content-script (injected.js)
+
+    filters in the global that follows the form: {wordFilters: [wordFilter, wordFilter, ...], imageFilter: imageFilter}
+
+*/
+
+
 var filters = JSON.parse(localStorage.getItem('filters'))
 
 chrome.runtime.onMessage.addListener(function(msg, sender) {
