@@ -1,4 +1,4 @@
 TODO:
 
 + refactor code
-+ fix image filters
++ Rewrite how filters are stored
