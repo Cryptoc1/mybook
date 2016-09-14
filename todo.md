@@ -1,4 +1,4 @@
 TODO:
 
 + refactor code
-+ Rewrite how filters are stored
++ move to regex for smarter filters
