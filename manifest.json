@@ -12,6 +12,9 @@
     "permissions": [],
     "content_scripts": [{
         "matches": ["https://www.facebook.com/*"],
-        "js": ["injected.js"]
-    }]
+        "js": ["js/injected.js"]
+    }],
+    "background": {
+        "scripts": ["js/background.js"]
+    }
 }

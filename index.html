@@ -1,1 +1,106 @@
-<h1>Hello World!</h1>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MyBook</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <style>
+        html,
+        body {
+            width: 400px;
+            padding-bottom: 10pt;
+            margin: 0;
+            outline: none;
+            border: none;
+            background-color: #FEFEFE;
+            font-family: Roboto-Sans, Helvetica, Arial, sans-serif, serif;
+            font-size: 1em;
+            color: rgba(34, 34, 34, .98);
+            font-weight: 400;
+            text-align: center;
+        }
+
+        header {
+            width: 100%;
+            background-color: #FFFFFF;
+            padding: 14pt 0 14pt 0;
+            box-shadow: 0px 2px 6px #EEEEEE;
+            font-weight: 800;
+            font-size: 14pt;
+            /*color: rgba(33, 150, 243, .85);*/
+        }
+
+        #saved {
+            display: none;
+            font-weight: 800;
+        }
+
+        form {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        form fieldset {
+            width: 100%;
+            /*margin: 0 auto;*/
+            border: none;
+            outline: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        form fieldset h3 {
+            text-align: left;
+        }
+
+        form fieldset input {
+            width: 40%;
+            border: none;
+            outline: none;
+            font-size: 10pt;
+            margin: 6pt;
+            padding: 4pt;
+            background-color: #EEEEEE;
+            border-radius: 2px;
+        }
+
+        form button {
+            margin: 6pt;
+            border: none;
+            outline: none;
+            border-radius: 3px;
+            padding: 6pt 12pt 6pt 12pt;
+            cursor: pointer;
+            font-size: 10pt;
+            font-weight: 600;
+            background-color: #BDBDBD;
+            transition: all .45s;
+            color: rgba(60, 60, 60, .98);
+        }
+
+        form button:hover,
+        form button:active {
+            background-color: #9E9E9E;
+        }
+    </style>
+</head>
+
+<body>
+    <header>MyBook</header>
+    <div class="container">
+        <div id="saved">
+            <br>Reload facebook for filters to take effect.</div>
+        <form>
+            <fieldset id="keywords">
+                <h3>Keyword Filtering</h3>
+            </fieldset>
+            <button id="add-filter-btn" type="button"><i class="fa fa-plus"></i></button>
+            <br>
+            <br>
+            <button id="save-btn" type="button">Save</button>
+        </form>
+    </div>
+</body>
+<script src="js/index.js"></script>
+
+</html>
